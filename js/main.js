@@ -1,7 +1,7 @@
 // 검색 영역(div.search) 클릭 시 강제 포커스 및 제어
 // 검색 영역 찾기
 const searchEl = document.querySelector('.search');
-// const searchEInputEl = document.querySelector('.search input');
+// const searchInputEl = document.querySelector('.search input');
 // 문서 전체에서 찾지말고 아래와 같이 최적화
 const searchInputEl = searchEl.querySelector('.search input');
 

@@ -7,6 +7,8 @@ body {
   color: #333;
   /* 위 속성들은 모두 상속되기에 전체 스타일을 한번에 제어 */
   overflow-x: hidden;
+
+  height: 3000px;
 }
 
 a {
