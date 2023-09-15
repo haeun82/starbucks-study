@@ -139,7 +139,7 @@ gsap.to('.floating1', 1.5, {
 });
 
 gsap.to('.floating2', 2, {
-  dalay: 0.5, 
+  dalay: 1.5, 
   y: 15, 
   repeat: -1, 
   yoyo: true, 
@@ -154,3 +154,14 @@ gsap.to('.floating3', 2.5, {
   ease: Power1.easeInOut 
 });
 
+// ScrollMagic 사용
+// 그 외 scrollreveal
+const spyEls = document.querySelectorAll('section.scroll-spy');
+spyEls.forEach(function (spyEl) {
+  new ScrollMagic.Scene({ // 감시할 장면(Scene) 추가 및 옵션 지정
+    triggerElement: spyEl, // 보여짐 여부를 감시할 요소를 지정
+    triggerHook: 0.8 // 화면의 80% 지점에서 보여짐 여부 감시 (0~1사이 지정)
+  })
+  .setClassToggle(spyEl, 'show') // 요소가 화면에 보이면 show 클래스를 추가
+  .addTo(new ScrollMagic.Controller()); // 컨트롤러에 장면을 할당(해당 라이브러리 동작을 위해서 필수!)
+});
