@@ -28,6 +28,14 @@ searchInputEl.addEventListener('blur', function () { // 해제
 // 페이지 스크롤에 따른 요소 제어
 const badgeEl = document.querySelector('header .badges');
 
+// 페이지 최상단으로 이동
+const toTopEl = document.querySelector('#to-top');
+toTopEl.addEventListener('click', function () {
+  gsap.to(window, 1, {
+    scrollTo: 0, // 페이지의 0px 지점 (최상단)으로 이동, ScrollToPlugin을 연결을 해야 사용 가능한 옵션
+  });
+})
+
 // 페이지에 스크롤 이벤트 추가!
 // window: 브라우저 창 객체
 window.addEventListener('scroll', function () {
@@ -44,12 +52,25 @@ window.addEventListener('scroll', function () {
       opacity: 0,
       display: 'none'
     });
+
+    // 상단으로 이동 버튼 보이기!
+    gsap.to(toTopEl, 0.6, {
+      opacity: 1,
+      x: 0 // x축으로 0px 지점으로 이동
+    });
+
   } else {
     // badgeEl.style.display = 'block';
 
     gsap.to(badgeEl, 0.6, {
       opacity: 1,
       display: 'block'
+    });
+
+     // 상단으로 이동 버튼 숨기기
+    gsap.to(toTopEl, 0.6, {
+      opacity: 0,
+      x: 100 // x축으로 100px 지점으로 이동
     });
   }
 });
@@ -165,3 +186,21 @@ spyEls.forEach(function (spyEl) {
   .setClassToggle(spyEl, 'show') // 요소가 화면에 보이면 show 클래스를 추가
   .addTo(new ScrollMagic.Controller()); // 컨트롤러에 장면을 할당(해당 라이브러리 동작을 위해서 필수!)
 });
+
+// 어워즈 섹션 슬라이드
+new Swiper('.awards .swiper', {
+  // 방향 설정 기본은 horizontal - 수평이면 안써도됨
+  loop: true, // 반복 재생 여부 true로 설정시 1->2->3->4->1 - 다시 1부터 반복 재생
+  autoplay: true,
+  slidesPerView: 5, // 한번에 보여줄 슬라이드 갯수 (기본값: 1개)
+  spaceBetween: 30, // 슬라이드 사이 여백 간격 px
+  navigation: { // 슬라이드 이전/다음 버튼 사용
+    nextEl: '.awards .swiper-button-next', // 다음 버튼 요소
+    prevEl: '.awards .swiper-button-prev'// 이전 버튼 요소
+  }
+});
+
+// 현재 연도 표시
+// 날짜 정보를 가진 JS의 Date 객체 활용(JS가 기본으로 제공하는 객체)
+const thisYear = document.querySelector('.this-year');
+thisYear.textContent = new Date().getFullYear(); // 현재 연도의 정보가 숫자 데이터로 반환됨
